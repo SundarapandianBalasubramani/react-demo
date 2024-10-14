@@ -1,0 +1,94 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "JohnDoe@email.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "age": 30,
+      "password": "password123",
+      "createdAt": "2021-02-01T00:00:00.000Z",
+      "updatedAt": "2021-01-01T00:00:00.000Z",
+      "roles": [
+        "admin"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Jane Something",
+      "email": "JaneSomething@email.com",
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "age": 25,
+      "password": "password123",
+      "createdAt": "2021-01-01T00:00:00.000Z",
+      "updatedAt": "2021-01-01T00:00:00.000Z",
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Alice Smith",
+      "email": "AliceSmith@email.com",
+      "firstName": "Alice123",
+      "lastName": "Smith",
+      "age": 35,
+      "password": "password123",
+      "createdAt": "2021-01-01T00:00:00.000Z",
+      "updatedAt": "2021-01-01T00:00:00.000Z",
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": "4",
+      "age": "30",
+      "email": "test@test.com",
+      "firstName": "Test4",
+      "lastName": "Test5",
+      "name": "Test3",
+      "roles": [
+        "user"
+      ],
+      "createdAt": "2024-10-08T10:34:42.882Z",
+      "updatedAt": "2024-10-14T16:57:29.434Z"
+    },
+    {
+      "id": "5",
+      "age": "45",
+      "email": "test@test.com",
+      "firstName": "test5",
+      "lastName": "test5",
+      "name": "test50",
+      "roles": [
+        "user"
+      ],
+      "createdAt": "2024-10-14T17:00:38.083Z",
+      "updatedAt": "2024-10-14T17:00:44.354Z"
+    }
+  ],
+  "employees": [
+    {
+      "id": "1",
+      "name": "Alex Stewart",
+      "email": "AlexStewart@email.com"
+    },
+    {
+      "id": "2",
+      "name": "Jonty Rhodes",
+      "email": "JontyRhodes@email.com"
+    },
+    {
+      "id": "3",
+      "name": "Andy Butcher",
+      "email": "AndyButcher@email.com"
+    },
+    {
+      "id": "4",
+      "email": "test@test.com",
+      "name": "test1"
+    }
+  ]
+}
