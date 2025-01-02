@@ -1,18 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { baseUrl } from "../../App";
-export interface ComponentProps<T> {
-  data: T[];
-  loading: boolean;
-  error?: string;
-}
+import { useEffect, useState } from "react";
+import { baseUrl } from "../App";
 
-export const HOC = <T,>({
-  Component,
-  url,
-}: {
-  url: string;
-  Component: React.FC<ComponentProps<T>>;
-}) => {
+export const useCustom = <T>({ url }: { url: string }) => {
   const [details, setDetails] = useState<T[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
@@ -30,8 +19,7 @@ export const HOC = <T,>({
         setLoading(false);
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [url]);
 
-  return <Component data={details} loading={loading} error={error} />;
+  return { details, loading, error };
 };

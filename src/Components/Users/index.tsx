@@ -1,35 +1,12 @@
-import React, { useState } from "react";
-import { User, IUser } from "./User";
-import  Table  from 'react-bootstrap/Table'
-import { useGetUsersQuery } from "../../store/services/user";
-import { Events } from "../Modal/Actions";
+import React, {  useState } from "react";
+import { IUser, User } from "./User";
 import { ModalComponent } from "../Modal";
+import Table from "react-bootstrap/Table";
 import UserForm from "./UserForm";
 import { Button } from "react-bootstrap";
 import Add from "../SVG/Add";
-export const UsersContainer: React.FC = () => {
-  const {isLoading: loading, data: users, error} = useGetUsersQuery();
-  
-  const msg = error && 'message' in error ? error.message : undefined;
-
-  // const [users, setUsers] = useState<IUser[]>([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState<string | undefined>();
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const response = await fetch(`${baseUrl}/users`);
-  //       const users = await response.json();
-  //       setUsers(users);
-  //     } catch (e) {
-  //       setError((e as unknown as Error).message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   })();
-  // }, []);
-  return <UsersPresentaion loading={loading} data={users || []} error={msg} />;
-};
+import { Events } from "../Modal/Actions";
+import {  useGetUsersQuery } from "../../store/services/user";
 
 type UserItem = Pick<
   IUser,
@@ -45,6 +22,33 @@ const defaultUser: UserItem = {
   name: "",
   roles: "",
 };
+export const UsersContainer: React.FC = () => {
+  const { error, isLoading: loading, data: users } = useGetUsersQuery();
+  // const [users, setUsers] = useState<IUser[]>([]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState<string | undefined>();
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const response = await fetch(`${baseUrl}/users`);
+  //       const users = await response.json();
+  //       setUsers(users);
+  //     } catch (e) {
+  //       setError((e as Error).message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   })();
+  // }, []);
+  return (
+    <UsersPresentaion
+      loading={loading}
+      data={users || []}
+      error={error as any}
+    />
+  );
+};
+
 type UserFormState = {
   showModal: boolean;
   action: "edit" | "add" | "delete" | "none";
@@ -56,14 +60,17 @@ const initialState: UserFormState = {
   showModal: false,
   data: defaultUser,
 };
+
 export const UsersPresentaion: React.FC<{
   loading: boolean;
   data: IUser[];
   error?: string;
 }> = ({ loading, data, error }) => {
   const [user, setUser] = useState<UserFormState>(initialState);
+
   const showModal = (show: boolean, action:"edit" | "add" | "delete" | "none" = "none") =>
     setUser({ ...initialState, showModal: show, action });
+
   const onEvent = (e: Events) => {
     switch (e) {
       case Events.Close:
@@ -93,6 +100,9 @@ export const UsersPresentaion: React.FC<{
         break;
     }
   };
+
+  console.log(user);
+
   return (
     <>
       {loading && !error && <div>...Loading</div>}
@@ -117,7 +127,9 @@ export const UsersPresentaion: React.FC<{
             </thead>
             <tbody>
               {data.map((user) => (
-                 <User key={user.id} data={user} onEvent={onGridEvent} />
+                <tr key={user.id}>
+                  <User data={user} onEvent={onGridEvent} />
+                </tr>
               ))}
             </tbody>
           </Table>

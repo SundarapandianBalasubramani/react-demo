@@ -1,19 +1,19 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { Events } from "../Modal/Actions";
 import Edit from "../SVG/Edit";
 import Delete from "../SVG/Delete";
-import { Events } from "../Modal/Actions";
 
 export type IRole = "user" | "admin" | "superadmin";
 export interface IUser {
-  id: number | string;
+  id?: number | string;
   name: string;
   email: string;
   firstName: string;
   lastName: string;
   age: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   roles: IRole[];
 }
 
@@ -33,7 +33,7 @@ export const User: React.FC<{
     updatedAt,
   } = data;
   return (
-    <tr>
+    <>
       <td>{id}</td>
       <td>{name}</td>
       <td>{firstName}</td>
@@ -55,6 +55,6 @@ export const User: React.FC<{
           <Delete />
         </Button>
       </td>
-    </tr>
+    </>
   );
 };

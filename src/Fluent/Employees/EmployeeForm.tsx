@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../Theme";
 import {
   useCreateEmployeeMutation,
@@ -6,13 +6,13 @@ import {
   useLazyGetLastEmployeeQuery,
 } from "../../store/services/employees";
 import { Events } from "../../Components/Modal/Actions";
-import {
-  Field,
-  Input,
-  InputOnChangeData,
-  Button,
-} from "@fluentui/react-components";
+import { InputOnChangeData, Button } from "@fluentui/react-components";
+import { Fields, IField } from "../Fields";
 
+const fields: IField[] = [
+  { label: "Name", name: "name", type: "TEXT" },
+  { label: "Email", name: "email", type: "TEXT" },
+];
 export const EmployeeForm: React.FC<{
   onEvent: (e: Events) => void;
   data: {
@@ -64,12 +64,7 @@ export const EmployeeForm: React.FC<{
 
   return (
     <>
-      <Field label="Name">
-        <Input onChange={onChange} name="name" value={employee.name} />
-      </Field>
-      <Field label="Email">
-        <Input onChange={onChange} name="email" value={employee.email} />
-      </Field>
+      <Fields data={fields} onChange={onChange} />
       &nbsp;&nbsp; &nbsp;&nbsp;
       <br />
       <Button appearance={"primary"} onClick={() => onEvent(Events.Submit)}>

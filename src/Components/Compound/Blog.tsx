@@ -5,7 +5,7 @@ export type Blog = {
   description: string;
 };
 
-export const BlogComponent: React.FC<Blog> = ({ author, date, description, title }) => {
+export const Blog: React.FC<Blog> = ({ author, date, description, title }) => {
   return (
     <div>
       <h1>Blog</h1>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { baseUrl } from "../../Constants";
+import { baseUrl } from "../../App";
 import { IEmployee, Employee } from "./Employee";
 
 export const EmployeesContainer: React.FC = () => {
@@ -45,7 +45,9 @@ export const EmployeesPresentaion: React.FC<{
             </thead>
             <tbody>
               {data.map((emp) => (
-                 <Employee key={emp.id} {...emp} />
+                <tr key={emp.id}>
+                  <Employee {...emp} />
+                </tr>
               ))}
             </tbody>
           </table>

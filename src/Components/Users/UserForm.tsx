@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, FormGroup } from "react-bootstrap";
 import { Events, ModalActions } from "../Modal/Actions";
-import { useCreateUserMutation, useUpdateUserMutation } from "../../store/services/user";
+import { useAddUserMutation, useUpdateUserMutation } from "../../store/services/user";
 import { data } from "../Compound/data";
 import { IRole } from "./User";
 
@@ -16,7 +16,7 @@ const UserForm: React.FC<{onEvent:(e:Events)=>void, data: {
   }}> = (props) => {
   const [user, setUser] = useState(props.data);
 
-  const [addUser]  = useCreateUserMutation();
+  const [addUser] = useAddUserMutation();
   const [updateUser] = useUpdateUserMutation();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,17 +43,16 @@ const UserForm: React.FC<{onEvent:(e:Events)=>void, data: {
   };
 
 
-  const onEvent = async(e: Events) => {
+  const onEvent = (e: Events) => {
         if(e === Events.Close) props.onEvent(Events.Close);
         else{
             console.log("User Details:", user);            
             if(Number(user.id) === 0){
-              await  addUser({...user, roles: [user.roles as IRole], id: undefined});
+                addUser({...user, roles: [user.roles as IRole], id: undefined});
             }
             else{
-              await   updateUser({...user, roles: [user.roles as IRole]});
+                updateUser({...user, roles: [user.roles as IRole]});
             }
-            props.onEvent(Events.Close);
         }
         console.log("User Details:", user);
   }

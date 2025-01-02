@@ -3,8 +3,8 @@ import { LeftNav } from "../LeftNav";
 import DigitalClock from "../../Components/DigitalClock";
 import Counter from "../../Components/Counter";
 import Reducer from "../../Components/Reducer";
-import { makeStyles } from "@fluentui/react-components";
 import { Users } from "../Users";
+import { makeStyles } from "@fluentui/react-components";
 import { Employees } from "../Employees";
 
 const useStyles = makeStyles({

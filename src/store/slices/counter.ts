@@ -1,13 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 interface CounterState {
     value: number;
 }
 
-
-const initialState: CounterState={
-    value:0
-}
+const initialState: CounterState = {
+    value: 0,
+};
 
 const counterSlice = createSlice({
     name: 'counter',
@@ -23,5 +22,6 @@ const counterSlice = createSlice({
     },
 });
 
-export const { increment, decrement} = counterSlice.actions
+export const { increment, decrement } = counterSlice.actions;
+
 export default counterSlice.reducer;

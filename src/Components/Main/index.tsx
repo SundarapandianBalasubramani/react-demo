@@ -1,19 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import DigitalClock from "../DigitalClock";
 import Counter from "../Counter";
+import Reducer from "../Reducer";
 import { UsersContainer, UsersPresentaion } from "../Users";
+import { RenderProps } from "../RenderProps";
+import { Compound } from "../Compound";
+import { Blog } from "../Compound/Blog";
+import { CustomHookUsers } from "../CustomHook/CustomHookUsers";
+import { ComponentWithErrorWrapper } from "../ErrorBoundary/ComponentWithError";
 import { IUser } from "../Users/User";
 import { HOC } from "../HOC";
-import { EmployeesContainer } from "../Employees";
-import User from "../User";
-import { ComponentWithError } from "../ErrorBoundary/ComponentWithError";
-import ErrorBoundary from "../ErrorBoundary";
-import { BlogComponent } from "../Compound/Blog";
+
 import { data } from "../Compound/data";
-import { Compound } from "../Compound";
-import { CustomHookUsers } from "../Custom/CustomHookUsers";
-import { RenderProps } from "../RenderProps";
-import Reducer from "../Reducer";
+import { IEmployee } from "../Employees/Employee";
+import { EmployeesContainer, EmployeesPresentaion } from "../Employees";
 
 const UsersDetails: React.FC = () => {
   return HOC<IUser>({
@@ -22,31 +22,46 @@ const UsersDetails: React.FC = () => {
   });
 };
 
-// const EmployeeDetails: React.FC = () => {
-//   return HOC<IEmployee>({
-//     Component: EmployeesPresentaion,
-//     url: "employees",
-//   });
-// };
+const EmployeeDetails: React.FC = () => {
+  return HOC<IEmployee>({
+    Component: EmployeesPresentaion,
+    url: "employees",
+  });
+};
 
 export const Main: React.FC = () => {
   return (
     <main className="main-content">
-       <Routes>
-        <Route path="/" element={<></>} />
-        <Route path="/user" element={<User />} />
+      <Routes>
         <Route path="/digital-clock" element={<DigitalClock />} />
-        <Route path="/counter" element={<Reducer />} />
+        <Route path="/counter" element={<Counter />} />
+        <Route path="/reducer" element={<Reducer />} />
         <Route path="/users" element={<UsersContainer />} />
         <Route path="/employees" element={<EmployeesContainer />} />
         <Route path="/hocusers" element={<UsersDetails />} />
-        <Route path="/error" element={<ErrorBoundary><ComponentWithError /></ErrorBoundary> } />   
-        <Route path="/blog" element={<BlogComponent {...data} />}   />
-        <Route path="/Compound" element={<Compound  />}   />
-        <Route path="/customhook" element={<CustomHookUsers  />}   />
-        <Route path="/renderprops" element={<RenderProps url="users" render={(data,loading, error)=>{
-          return <UsersPresentaion data={data as IUser[]} loading={loading} error={error} />
-        }}  />}   />      
+        <Route path="/hocemployees" element={<EmployeeDetails />} />
+        <Route path="/error" element={<ComponentWithErrorWrapper />} />
+        <Route path="/customhook" element={<CustomHookUsers />} />
+        <Route path="/blog" element={<Blog {...data} />} />
+        <Route path="/compound" element={<Compound />} />
+        <Route
+          path="/renderprops"
+          element={
+            <RenderProps
+              url="users"
+              render={(data: IUser[], loading: boolean, error?: string) => {
+                return (
+                  <UsersPresentaion
+                    data={data}
+                    loading={loading}
+                    error={error}
+                  />
+                );
+              }}
+            />
+          }
+        />
+        <Route path="/" element={<></>} />
       </Routes>
     </main>
   );

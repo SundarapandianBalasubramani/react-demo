@@ -1,21 +1,13 @@
 import { useState } from "react";
 import { Events } from "../../Components/Modal/Actions";
-import {
-  TableBody,
-  TableCell,
-  TableRow,
-  Table,
-  TableHeader,
-  TableHeaderCell,
-  TableCellLayout,
-  Avatar,
-  Button,
-} from "@fluentui/react-components";
-import { AddRegular, DeleteRegular, EditRegular } from "@fluentui/react-icons";
+import { Button } from "@fluentui/react-components";
+import { AddRegular } from "@fluentui/react-icons";
 import { EmployeeForm } from "./EmployeeForm";
 import { Modal } from "../Dialog";
 import { useGetEmployeesQuery } from "../../store/services/employees";
 import { IEmployee } from "../../Components/Employees/Employee";
+
+import { TableComponent } from "../TableComponent";
 const defaultEmployee: IEmployee = {
   email: "",
 
@@ -91,49 +83,13 @@ export const Employees: React.FC = () => {
           Add Employee
         </Button>
       </div>
-
-      <Table arial-label="Default table" style={{ minWidth: "510px" }}>
-        <TableHeader>
-          <TableRow>
-            {columns.map((column) => (
-              <TableHeaderCell key={column.columnKey}>
-                {column.label}
-              </TableHeaderCell>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {!isLoading && data
-            ? data.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell>
-                    <TableCellLayout>{item.id}</TableCellLayout>
-                  </TableCell>
-                  <TableCell>
-                    <TableCellLayout
-                      media={<Avatar aria-label={item.name} name={item.name} />}
-                    >
-                      {item.name}
-                    </TableCellLayout>
-                  </TableCell>
-
-                  <TableCell>{item.email}</TableCell>
-                  <TableCell>
-                    <Button
-                      icon={<EditRegular />}
-                      onClick={() => onGridEvent(Events.Edit, item)}
-                    />
-                    &nbsp;&nbsp;
-                    <Button
-                      icon={<DeleteRegular />}
-                      onClick={() => onGridEvent(Events.Delete, item)}
-                    />
-                  </TableCell>
-                </TableRow>
-              ))
-            : undefined}
-        </TableBody>
-      </Table>
+      <TableComponent
+        data={data}
+        isLoading={isLoading}
+        columns={columns}
+        onGridEvent={onGridEvent}
+        keyField="id"
+      />
       <Modal title="Employee Details" open={employee.showModal}>
         <EmployeeForm onEvent={onEvent} data={employee.data} />
       </Modal>
